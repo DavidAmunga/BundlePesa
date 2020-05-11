@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BundlePesa</string>
+    <string name="amount_hint">Ongiza Kiasi</string>
+    <string name="btn_next_text">INGIA</string>
+    <string name="til_bundle_option_hint">Select Bundle Option</string>
+    <string name="til_select_contact_hint">Select Contact</string>
+    <string name="initialProcessingMessage">Please wait…</string>
+
+</resources>
