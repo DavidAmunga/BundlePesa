@@ -76,6 +76,7 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
             R.layout.dropdown_menu_popup_item,
             BUNDLE_OPTIONS
         )
+        Timber.d("Start BundlePesa")
         bundle_option.setAdapter(bundleAdapter)
 
         bundle_option.onItemClickListener =
@@ -109,10 +110,9 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
 
 //        Initialize Hover
         Hover.initialize(applicationContext, this)
-
-
+        Hover.setBranding("BundlePesa", R.mipmap.ic_launcher, this)
 //        Initiate Hover Permissions Activity
-        val intent = Intent(applicationContext, PermissionActivity::class.java)
+        val intent = Intent(this, PermissionActivity::class.java)
         startActivityForResult(intent, 123)
 
 
@@ -265,6 +265,11 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
 
             val data = data!!.getStringArrayExtra("session_messages")
             Timber.d("Session Messages : $data")
+
+
+//        Initialize Hover
+            Hover.initialize(applicationContext, this)
+
 
 //            if (data.size > 0) {
             Toast.makeText(this, "Completed!", Toast.LENGTH_SHORT).show()

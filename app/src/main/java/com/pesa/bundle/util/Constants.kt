@@ -11,8 +11,8 @@ object Constants {
     val CONTACT_OPTION_DIALER: String = "Dialer"
     val STATE_ENABLED: String = "STATE_ENABLED"
     val STATE_DISABLED: String = "STATE_DISABLED"
-    val ACTION_MY_NUMBER = "YOUR_ACTION_HERE"
-    val ACTION_OTHER_NUMBER = "YOUR_ACTION_HERE"
+    val ACTION_MY_NUMBER = "e673e78e"
+    val ACTION_OTHER_NUMBER = "b3925351"
 
 
 }

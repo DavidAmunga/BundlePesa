@@ -1,5 +1,4 @@
 ## BundlePesa
-
 ---
 
 A Simple Android Application that leverages on [Hover](https://usehover.com) SDK to perform USSD transactions particularly Safaricom No Expiry [Bundles](https://www.safaricom.co.ke/personal/data).
