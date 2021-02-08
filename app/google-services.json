@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "876998635517",
+    "project_id": "bundlepesa-app",
+    "storage_bucket": "bundlepesa-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:876998635517:android:16166fc0def3181f0d7394",
+        "android_client_info": {
+          "package_name": "com.pesa.bundle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "876998635517-ua9l35js44hos3h69hkv7fqknaj0carn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pesa.bundle",
+            "certificate_hash": "1c14e0873d51860047a54e74a1e75af8f199db4a"
+          }
+        },
+        {
+          "client_id": "876998635517-nlng0ic6fjqhlcisnfc8sqa55l4vpm95.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZ6vyd6aROXri5ggh_DZohWUmQiMi5OnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "876998635517-nlng0ic6fjqhlcisnfc8sqa55l4vpm95.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

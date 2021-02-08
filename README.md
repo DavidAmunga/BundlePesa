@@ -7,7 +7,6 @@ This is an submission for the Giza Hackathon
 ### Libraries Used
 
 ---
-
 - [Hover](https://usehover.com) - USSD Automation
 - [Material Components](https://github.com/material-components/material-components-android) - Using Google's new Material Design
 - [Timber](https://github.com/JakeWharton/timber) - For Logging

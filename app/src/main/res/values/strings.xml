@@ -5,5 +5,6 @@
     <string name="til_bundle_option_hint">Select Bundle Option</string>
     <string name="til_select_contact_hint">Select Contact</string>
     <string name="initialProcessingMessage">Please wait…</string>
+    <string name="author" translatable="false"><a href="https://davidamunga.com">David Amunga</a></string>
 
 </resources>

@@ -3,10 +3,14 @@ package com.pesa.bundle
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
+import android.text.Html
 import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -16,6 +20,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.hover.sdk.actions.HoverAction
 import com.hover.sdk.api.Hover
 import com.hover.sdk.api.HoverParameters
@@ -45,6 +50,7 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
     private var otherPhoneNo: String? = null
     private var contactOption: String? = null
     private var bundleOption: Int? = null
+    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     private val BUNDLE_OPTIONS = arrayListOf("Data Bundle", "Voice Bundle")
     private val CONTACT_OPTIONS =
@@ -68,6 +74,7 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
 
 //        Init Timber
         Timber.tag("MainActivity")
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
 //        Init Bundle Options
         bundle_option.inputType = InputType.TYPE_NULL
@@ -138,7 +145,11 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
             performAction()
 
         })
+        txt_author.setText(Html.fromHtml("<a href=\"https://davidamunga.com\">David Amunga</a>"));
+        txt_author.setTextColor(Color.BLACK);
+        txt_author.setMovementMethod(LinkMovementMethod.getInstance());
 
+//        Linkify.addLinks(txt_author, Linkify.ALL)
     }
 
     private fun verifyContactOption(option: String) {
@@ -311,8 +322,8 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        val inflater = menuInflater
-//        inflater.inflate(R.menu.menu_main, menu)
+        val inflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -320,7 +331,18 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle presses on the action bar menu items
         when (item.itemId) {
-            R.id.nav_change_lang -> {
+            R.id.nav_share -> {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        "Hello there ! Try out BundlePesa https://bundlepesa.com"
+                    )
+                    type = "text/plain"
+                }
+
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
                 return true
             }
 
