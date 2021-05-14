@@ -118,12 +118,15 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
 
         pay_option.onItemClickListener =
             AdapterView.OnItemClickListener { parent, view, position, id ->
-                parent.getItemAtPosition(position).toString().let { it ->
+                parent.getItemAtPosition(position).toString().let { selectedPayOption ->
 
+                    Timber.d("Position "+selectedPayOption)
 //                    MPESA
-                    if (position == 1) {
+                    if (selectedPayOption == Constants.PAY_OPTION_MPESA) {
                         payOption = 2
-                    } else {
+                    }
+
+                    if(selectedPayOption == Constants.PAY_OPTION_AIRTIME){
 //                        AIRTIME
                         payOption = 1
                     }
@@ -215,9 +218,9 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
     private fun performAction() {
 //
 
-        var action: String = getHoverAction()
+        val action: String = getHoverAction()
 
-        Timber.d("Hover Action "+action)
+        Timber.d("Hover Action $action")
         val intent = HoverParameters.Builder(this@MainActivity)
             .request(action)
             .style(R.style.hoverStyle)
@@ -225,7 +228,6 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
             .initialProcessingMessage(resources.getString(R.string.initialProcessingMessage))
             .showUserStepDescriptions(true);
 
-        if (bundleOption != null) intent.extra("bundleOption", bundleOption.toString())
         if (otherPhoneNo != null) intent.extra(
             "otherNumber",
             otherPhoneNo
@@ -236,6 +238,9 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
                 payOption.toString()
             )
         }
+
+        Timber.d("Pay Option $payOption")
+//        Timber.d("Amount ${txt_amount.getText().toString()}")
 
         intent.extra(
             "amount",
