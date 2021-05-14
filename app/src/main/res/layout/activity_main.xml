@@ -47,6 +47,26 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_pay_select"
+        style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:hint="Select Payment Mode"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/til_contact_select"
+        app:startIconDrawable="@drawable/ic_wallet">
+
+        <AutoCompleteTextView
+            android:id="@+id/pay_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
     <TextView
         android:id="@+id/txt_other_phone_no"
         android:layout_width="match_parent"
@@ -62,7 +82,7 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/til_contact_select" />
+        app:layout_constraintTop_toBottomOf="@id/til_pay_select" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/til_amount"
@@ -87,6 +107,7 @@
             android:maxLength="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/message"

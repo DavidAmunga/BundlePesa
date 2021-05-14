@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
     private var otherPhoneNo: String? = null
     private var contactOption: String? = null
     private var bundleOption: Int? = null
+    private var payOption: Int? = null
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     private val BUNDLE_OPTIONS = arrayListOf("Data Bundle", "Voice Bundle")
@@ -59,6 +60,12 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
             Constants.CONTACT_OPTION_DIALER
         )
 
+    private val PAY_OPTIONS =
+        arrayListOf(
+            Constants.PAY_OPTION_MPESA,
+            Constants.PAY_OPTION_AIRTIME
+        )
+
     private val PERMISSIONS = listOf(
         Manifest.permission.READ_PHONE_STATE,
         Manifest.permission.CALL_PHONE,
@@ -66,6 +73,7 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
     )
 
     private lateinit var bundleAdapter: ArrayAdapter<String>
+    private lateinit var payOptionAdapter: ArrayAdapter<String>
     private lateinit var contactAdapter: ArrayAdapter<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -97,6 +105,33 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
                 }
 
             }
+
+
+//        Init Pay Options
+        pay_option.inputType = InputType.TYPE_NULL
+        payOptionAdapter = ArrayAdapter<String>(
+            this,
+            R.layout.dropdown_menu_popup_item,
+            PAY_OPTIONS
+        )
+        pay_option.setAdapter(payOptionAdapter)
+
+        pay_option.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                parent.getItemAtPosition(position).toString().let { it ->
+
+//                    MPESA
+                    if (position == 1) {
+                        payOption = 2
+                    } else {
+//                        AIRTIME
+                        payOption = 1
+                    }
+
+                }
+
+            }
+
 
         //        Init Contact Options
         contact_option.inputType = InputType.TYPE_NULL
@@ -180,10 +215,9 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
     private fun performAction() {
 //
 
-        val action: String =
-            if (otherPhoneNo != null) Constants.ACTION_OTHER_NUMBER else Constants.ACTION_MY_NUMBER
+        var action: String = getHoverAction()
 
-        Constants.ACTION_OTHER_NUMBER
+        Timber.d("Hover Action "+action)
         val intent = HoverParameters.Builder(this@MainActivity)
             .request(action)
             .style(R.style.hoverStyle)
@@ -196,6 +230,12 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
             "otherNumber",
             otherPhoneNo
         )
+        if (payOption != null) {
+            intent.extra(
+                "payOption",
+                payOption.toString()
+            )
+        }
 
         intent.extra(
             "amount",
@@ -203,6 +243,25 @@ class MainActivity : AppCompatActivity(), Hover.DownloadListener, Hover.ActionCh
         )
 
         startActivityForResult(intent.buildIntent(), PERMISSIONS_HOVER_REQUEST)
+    }
+
+    private fun getHoverAction(): String {
+        //        Voice Bundle
+        if (selectedBundleOption.equals("Voice Bundle") && otherPhoneNo == null) {
+            return Constants.ACTION_AIRTIME_MY_NUMBER_MPESA
+        }
+        if (selectedBundleOption.equals("Data Bundle") && otherPhoneNo == null) {
+            return Constants.ACTION_DATA_MY_NUMBER_MPESA
+        }
+
+        if (selectedBundleOption.equals("Data Bundle") && otherPhoneNo != null) {
+            return Constants.ACTION_DATA_OTHER_NUMBER_MPESA
+        }
+        if (selectedBundleOption.equals("Voice Bundle") && otherPhoneNo != null) {
+            return Constants.ACTION_VOICE_OTHER_NUMBER_MPESA
+        }
+
+        return ""
     }
 
 

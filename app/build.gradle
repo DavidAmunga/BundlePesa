@@ -6,13 +6,13 @@ apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    compileSdkVersion   30
+    buildToolsVersion "29.0.3"
 
     defaultConfig {
         applicationId "com.pesa.bundle"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 2
         versionName "1.1"
 
@@ -52,7 +52,7 @@ dependencies {
 
 //    Hover SDK
     //noinspection GradleDependency
-    implementation 'com.hover:android-sdk:1.7.1'
+    implementation 'com.hover:android-sdk:1.6.1'
 
 //   Material UI SDK
     implementation 'com.google.android.material:material:1.1.0'

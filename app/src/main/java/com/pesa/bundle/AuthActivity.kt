@@ -68,6 +68,8 @@ class AuthActivity : AppCompatActivity() {
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
+                Timber.d("Sign In")
+
                 // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)!!
                 Timber.d("firebaseAuthWithGoogle:" + account.id)
